@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id          String   @id @default(cuid())
+  clerkUserId String   @unique
+  role        UserRole @default(USER)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Request {
+  id          String          @id @default(cuid())
+  location    RequestLocation
+  requestedBy String
+  description String
+  status      RequestStatus   @default(PENDING)
+  completedAt DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([status, createdAt])
+  @@index([location, createdAt])
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum RequestStatus {
+  PENDING
+  COMPLETED
+}
+
+enum RequestLocation {
+  FAIRVIEW
+  GEORGE_BUSH
+  UNIVERSITY_DRIVE
+  HIGHWAY_30
+  HOTEL
+  OTHER
+}

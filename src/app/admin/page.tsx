@@ -1,17 +1,23 @@
-import { getRequestsForDriver } from "@/lib/queries/get-requests"
-import { requireDbUser } from "@/lib/auth"
+import { getRequestsForAdmin } from "@/lib/queries/get-requests"
+import { requireAdmin } from "@/lib/auth"
 import { LOCATION_LABELS } from "@/lib/formatters"
+import { Button } from "@/components/ui/button"
 import { Header } from "@/components/Header"
 import { RequestCard } from "@/components/RequestCard"
+import Link from "next/link"
 
 export default async function Home() {
- await requireDbUser()
+ await requireAdmin()
 
- const requests = await getRequestsForDriver()
+ const requests = await getRequestsForAdmin()
 
  return (
   <main>
-   <Header />
+   <Header>
+    <Button type="button" asChild>
+     <Link href={"/admin/create"}>Create Request</Link>
+    </Button>
+   </Header>
    {requests.length === 0 ? (
     <section className="flex items-center justify-center h-dvh">
      <p>You&apos;re all caught up!</p>
@@ -21,7 +27,7 @@ export default async function Home() {
      {requests.map((request) => (
       <RequestCard
        key={request.id}
-       href={`/${request.id}`}
+       href={`/admin/${request.id}/edit`}
        location={LOCATION_LABELS[request.location]}
        date={request.createdAt}
        description={request.description}
