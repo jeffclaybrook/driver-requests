@@ -24,7 +24,7 @@ export function Header({
     <UserButton
      appearance={{
       elements: {
-       userButtonAvatarBox: "!h-8 !w-8"
+       userButtonAvatarBox: "!h-10 !w-10"
       }
      }}
     />
