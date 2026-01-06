@@ -20,7 +20,7 @@ export function RequestCard({
 }: RequestCardProps) {
  return (
   <Link href={href} className="cursor-pointer group">
-   <Card className="shadow-none group-hover:shadow-sm">
+   <Card className="shadow-none group-hover:shadow transition duration-100">
     <CardHeader className="flex flex-row items-center justify-between">
      <CardTitle>{location}</CardTitle>
      <CardDescription>{formatDate(date)}</CardDescription>

@@ -1,4 +1,4 @@
-import { getRequestsForAdmin } from "@/lib/queries/get-requests"
+import { getRequestsForAdmin } from "@/lib/queries/requests"
 import { requireAdmin } from "@/lib/auth"
 import { LOCATION_LABELS } from "@/lib/formatters"
 import { Button } from "@/components/ui/button"

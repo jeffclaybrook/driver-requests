@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getRequestById } from "@/lib/queries/get-requests"
+import { getRequestById } from "@/lib/queries/requests"
 import { requireDbUser } from "@/lib/auth"
 import { LOCATION_LABELS, STATUS_LABELS, formatDate } from "@/lib/formatters"
 import { Badge } from "@/components/ui/badge"

@@ -1,17 +1,29 @@
-import { getRequestsForDriver } from "@/lib/queries/get-requests"
+import { getRequestsForDriver } from "@/lib/queries/requests"
 import { requireDbUser } from "@/lib/auth"
 import { LOCATION_LABELS } from "@/lib/formatters"
+import { Button } from "@/components/ui/button"
 import { Header } from "@/components/Header"
 import { RequestCard } from "@/components/RequestCard"
+import Link from "next/link"
 
 export default async function Home() {
- await requireDbUser()
-
+ const user = await requireDbUser()
+ const isAdmin = user.role === "ADMIN"
  const requests = await getRequestsForDriver()
 
  return (
   <main>
-   <Header />
+   <Header>
+    {isAdmin && (
+     <Button
+      type="button"
+      variant="ghost"
+      asChild
+     >
+      <Link href={"/admin"}>Admin</Link>
+     </Button>
+    )}
+   </Header>
    {requests.length === 0 ? (
     <section className="flex items-center justify-center h-dvh">
      <p>You&apos;re all caught up!</p>
