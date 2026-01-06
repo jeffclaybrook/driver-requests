@@ -29,7 +29,7 @@ export default async function Home() {
      <p>You&apos;re all caught up!</p>
     </section>
    ) : (
-    <section className="grid lg:grid-cols-4 gap-2 lg:gap-4 pt-16 p-2 lg:px-4">
+    <section className="grid lg:grid-cols-4 gap-2 lg:gap-4 pt-18 p-4 lg:px-6">
      {requests.map((request) => (
       <RequestCard
        key={request.id}
