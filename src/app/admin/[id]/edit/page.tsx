@@ -48,7 +48,7 @@ export default async function Edit({
      </Link>
     </Button>
    </header>
-   <Card className="max-w-xl w-full mx-auto">
+   <Card className="max-w-xl w-full mx-auto shadow-xs">
     <CardHeader>
      <CardTitle className="text-2xl font-semibold text-center">Edit Request</CardTitle>
     </CardHeader>

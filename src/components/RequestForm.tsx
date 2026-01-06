@@ -101,13 +101,19 @@ export function RequestForm({ request }: RequestFormProps) {
        <FormLabel>Select Location</FormLabel>
        <Select defaultValue={field.value} onValueChange={field.onChange}>
         <FormControl>
-         <SelectTrigger className="w-full">
+         <SelectTrigger className="w-full md:text-base">
           <SelectValue placeholder="Select location" />
          </SelectTrigger>
         </FormControl>
         <SelectContent>
          {locationOptions.map((location) => (
-          <SelectItem key={location.value} value={location.value}>{location.label}</SelectItem>
+          <SelectItem
+           key={location.value}
+           value={location.value}
+           className="md:text-base"
+          >
+           {location.label}
+          </SelectItem>
          ))}
         </SelectContent>
        </Select>
@@ -122,7 +128,7 @@ export function RequestForm({ request }: RequestFormProps) {
       <FormItem>
        <FormLabel>Requested By</FormLabel>
        <FormControl>
-        <Input placeholder="Requested by" className="h-10 shadow-none" {...field} />
+        <Input placeholder="Requested by" className="h-12 shadow-none md:text-base" {...field} />
        </FormControl>
        <FormMessage />
       </FormItem>
@@ -135,7 +141,7 @@ export function RequestForm({ request }: RequestFormProps) {
       <FormItem>
        <FormLabel>Description</FormLabel>
        <FormControl>
-        <Textarea placeholder="Description" className="min-h-[100px] shadow-none" {...field} />
+        <Textarea placeholder="Description" className="min-h-[100px] shadow-none md:text-base" {...field} />
        </FormControl>
        <FormMessage />
       </FormItem>
@@ -164,7 +170,7 @@ export function RequestForm({ request }: RequestFormProps) {
         <Button
          type="button"
          variant="outline"
-         className="border-destructive text-destructive"
+         className="border-destructive text-destructive hover:border-destructive hover:bg-destructive hover:text-white"
         >
          <DeleteIcon className="size-6" />
          Delete

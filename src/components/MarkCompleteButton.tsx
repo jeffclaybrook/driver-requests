@@ -12,27 +12,29 @@ export function MarkCompleteButton({
 }) {
  const [isPending, startTransition] = useTransition()
 
+ const handleClick = () => {
+  startTransition(async () => {
+   await markRequestCompleted(requestId)
+   toast.success("Request completed!", {
+    action: {
+     label: "Undo",
+     onClick: () => {
+      startTransition(async () => {
+       await undoMarkRequestCompleted(requestId)
+      })
+     }
+    }
+   })
+   window.location.href = "/"
+  })
+ }
+
  return (
   <Button
    type="button"
    disabled={isPending}
    className="w-full"
-   onClick={() => {
-    startTransition(async () => {
-     await markRequestCompleted(requestId)
-     toast.success("Request completed!", {
-      action: {
-       label: "Undo",
-       onClick: () => {
-        startTransition(async () => {
-         await undoMarkRequestCompleted(requestId)
-        })
-       }
-      }
-     })
-     window.location.href = "/"
-    })
-   }}
+   onClick={handleClick}
   >
    Mark Completed
   </Button>

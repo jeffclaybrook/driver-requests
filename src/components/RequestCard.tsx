@@ -20,13 +20,13 @@ export function RequestCard({
 }: RequestCardProps) {
  return (
   <Link href={href} className="cursor-pointer group">
-   <Card className="shadow-none group-hover:shadow transition duration-100">
+   <Card className="h-full shadow-none group-hover:shadow-md transition-shadow duration-200">
     <CardHeader className="flex flex-row items-center justify-between">
      <CardTitle>{location}</CardTitle>
      <CardDescription>{formatDate(date)}</CardDescription>
     </CardHeader>
     <CardContent>
-     <p>{description}</p>
+     <p className="line-clamp-2">{description}</p>
     </CardContent>
     <CardFooter className="justify-end">
      <Badge variant={status === "PENDING" ? "secondary" : "success"}>{STATUS_LABELS[status]}</Badge>

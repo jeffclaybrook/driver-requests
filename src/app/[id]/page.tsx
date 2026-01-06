@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getRequestById } from "@/lib/queries/requests"
+import { getRequestById } from "@/lib/queries/get-request-by-id"
 import { requireDbUser } from "@/lib/auth"
 import { LOCATION_LABELS, STATUS_LABELS, formatDate } from "@/lib/formatters"
 import { Badge } from "@/components/ui/badge"
@@ -40,11 +40,11 @@ export default async function Request({
      </Link>
     </Button>
    </header>
-   <Card className="max-w-xl w-full mx-auto">
+   <Card className="max-w-xl w-full mx-auto shadow-xs">
     <CardHeader>
      <CardTitle className="text-2xl font-semibold text-center">Driver Request</CardTitle>
     </CardHeader>
-    <CardContent className="space-y-4">
+    <CardContent className="space-y-5">
      <div className="space-y-1">
       <CardDescription>Location:</CardDescription>
       <p className="font-medium">{LOCATION_LABELS[request.location]}</p>

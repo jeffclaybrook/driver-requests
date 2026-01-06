@@ -1,4 +1,4 @@
-import { getRequestsForDriver } from "@/lib/queries/requests"
+import { getRequestsForDriver } from "@/lib/queries/get-requests-for-driver"
 import { requireDbUser } from "@/lib/auth"
 import { LOCATION_LABELS } from "@/lib/formatters"
 import { Button } from "@/components/ui/button"
