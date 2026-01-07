@@ -35,6 +35,7 @@ export const LOCATION_LABELS: Record<RequestLocation, string> = {
  UNIVERSITY_DRIVE: "University Drive",
  HIGHWAY_30: "Highway 30",
  HOTEL: "Hotel",
+ SCREENED_IMAGES: "Screened Images",
  OTHER: "Other"
 }
 

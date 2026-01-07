@@ -23,6 +23,7 @@ const locationOptions: { value: RequestLocation; label: string }[] = [
  { value: "UNIVERSITY_DRIVE", label: "University Drive" },
  { value: "HIGHWAY_30", label: "Highway 30" },
  { value: "HOTEL", label: "Hotel" },
+ { value: "SCREENED_IMAGES", label: "Screened Images" },
  { value: "OTHER", label: "Other" }
 ]
 
@@ -152,12 +153,12 @@ export function RequestForm({ request }: RequestFormProps) {
      name="completed"
      render={({ field }) => (
       <FormItem>
-       <FormLabel>Status</FormLabel>
+       <span className="flex items-center gap-2 text-sm leading-none font-medium select-none">Status</span>
        <div className="flex items-center gap-2">
         <FormControl>
          <Checkbox checked={field.value} onCheckedChange={(checked) => field.onChange(!!checked)} />
         </FormControl>
-        <span className="text-md">Completed?</span>
+        <FormLabel className="text-md font-normal">Completed?</FormLabel>
        </div>
        <FormMessage />
       </FormItem>

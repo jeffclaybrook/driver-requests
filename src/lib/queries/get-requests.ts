@@ -3,7 +3,7 @@
 import { requireAdmin } from "../auth"
 import { prisma } from "../prisma"
 
-export async function getRequestsForAdmin() {
+export async function getRequests() {
  await requireAdmin()
 
  return prisma.request.findMany({

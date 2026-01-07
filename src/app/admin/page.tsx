@@ -1,4 +1,4 @@
-import { getRequestsForAdmin } from "@/lib/queries/get-requests-for-admin"
+import { getRequests } from "@/lib/queries/get-requests"
 import { requireAdmin } from "@/lib/auth"
 import { LOCATION_LABELS } from "@/lib/formatters"
 import { Button } from "@/components/ui/button"
@@ -9,7 +9,7 @@ import Link from "next/link"
 export default async function Home() {
  await requireAdmin()
 
- const requests = await getRequestsForAdmin()
+ const requests = await getRequests()
 
  return (
   <main>
@@ -27,7 +27,7 @@ export default async function Home() {
      {requests.map((request) => (
       <RequestCard
        key={request.id}
-       href={`/admin/${request.id}/edit`}
+       href={`/admin/${request.id}`}
        location={LOCATION_LABELS[request.location]}
        date={request.createdAt}
        description={request.description}

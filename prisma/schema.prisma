@@ -44,5 +44,6 @@ enum RequestLocation {
   UNIVERSITY_DRIVE
   HIGHWAY_30
   HOTEL
+  SCREENED_IMAGES
   OTHER
 }

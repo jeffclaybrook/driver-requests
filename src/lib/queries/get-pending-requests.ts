@@ -4,7 +4,7 @@ import { RequestStatus } from "@prisma/client"
 import { requireDbUser } from "../auth"
 import { prisma } from "../prisma"
 
-export async function getRequestsForDriver() {
+export async function getPendingRequests() {
  await requireDbUser()
 
  return prisma.request.findMany({

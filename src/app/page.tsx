@@ -1,4 +1,4 @@
-import { getRequestsForDriver } from "@/lib/queries/get-requests-for-driver"
+import { getPendingRequests } from "@/lib/queries/get-pending-requests"
 import { requireDbUser } from "@/lib/auth"
 import { LOCATION_LABELS } from "@/lib/formatters"
 import { Button } from "@/components/ui/button"
@@ -9,7 +9,7 @@ import Link from "next/link"
 export default async function Home() {
  const user = await requireDbUser()
  const isAdmin = user.role === "ADMIN"
- const requests = await getRequestsForDriver()
+ const requests = await getPendingRequests()
 
  return (
   <main>
