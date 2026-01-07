@@ -11,9 +11,14 @@ export async function getPendingRequests() {
   where: {
    status: RequestStatus.PENDING
   },
-  orderBy: {
-   createdAt: "desc"
-  },
+  orderBy: [
+   {
+    location: "asc"
+   },
+   {
+    createdAt: "desc"
+   }
+  ],
   select: {
    id: true,
    location: true,

@@ -10,6 +10,7 @@ export default async function Home() {
  const user = await requireDbUser()
  const isAdmin = user.role === "ADMIN"
  const requests = await getPendingRequests()
+ const grouped = Object.groupBy(requests, (request) => request.location)
 
  return (
   <main>
@@ -29,16 +30,23 @@ export default async function Home() {
      <p>You&apos;re all caught up!</p>
     </section>
    ) : (
-    <section className="grid lg:grid-cols-4 gap-2 lg:gap-4 pt-18 p-4 lg:px-6">
-     {requests.map((request) => (
-      <RequestCard
-       key={request.id}
-       href={`/${request.id}`}
-       location={LOCATION_LABELS[request.location]}
-       date={request.createdAt}
-       description={request.description}
-       status={request.status}
-      />
+    <section className="pt-18 p-4 lg:px-6 space-y-10">
+     {Object.entries(grouped).map(([location, items]) => (
+      <div key={location}>
+       <h2 className="text-lg font-semibold mb-2">{location}</h2>
+       <div className="grid lg:grid-cols-4 gap-2 lg:gap-4">
+        {items.map((item) => (
+         <RequestCard
+          key={item.id}
+          href={`/${item.id}`}
+          location={LOCATION_LABELS[item.location]}
+          date={item.createdAt}
+          description={item.description}
+          status={item.status}
+         />
+        ))}
+       </div>
+      </div>
      ))}
     </section>
    )}
