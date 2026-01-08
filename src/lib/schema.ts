@@ -8,4 +8,10 @@ export const requestFormSchema = z.object({
  completed: z.boolean().optional().default(false)
 })
 
+export const noteFormSchema = z.object({
+ note: z.string().max(2000, "Note must be less than 2000 characters").optional().default("")
+})
+
 export type RequestFormValues = z.input<typeof requestFormSchema>
+
+export type NoteFormValues = z.input<typeof noteFormSchema>

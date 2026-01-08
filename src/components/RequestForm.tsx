@@ -197,7 +197,13 @@ export function RequestForm({ request }: RequestFormProps) {
        Cancel
       </Button>
      )}
-     <Button type="submit" disabled={isPending}>{isPending ? "Saving..." : "Save"}</Button>
+     <Button
+      type="submit"
+      disabled={isPending}
+      className="bg-theme hover:bg-theme/90"
+     >
+      {isPending ? "Saving..." : "Save"}
+     </Button>
     </div>
    </form>
   </Form>

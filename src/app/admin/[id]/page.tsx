@@ -5,7 +5,7 @@ import { LOCATION_LABELS, STATUS_LABELS, formatDate } from "@/lib/formatters"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { BackIcon } from "@/components/Icons"
+import { BackIcon, EditIcon } from "@/components/Icons"
 import Link from "next/link"
 
 export default async function Request({
@@ -26,6 +26,7 @@ export default async function Request({
    createdAt: true,
    description: true,
    status: true,
+   note: true
   }
  })
 
@@ -49,13 +50,20 @@ export default async function Request({
       <span className="sr-only">Back to Admin</span>
      </Link>
     </Button>
-    <Button type="button" asChild>
-     <Link href={`/admin/${request.id}/edit`}>Edit</Link>
+    <Button
+     type="button"
+     className="bg-theme hover:bg-theme/90"
+     asChild
+    >
+     <Link href={`/admin/${request.id}/edit`}>
+      <EditIcon className="size-5" />
+      Edit
+     </Link>
     </Button>
    </header>
    <Card className="max-w-xl w-full mx-auto shadow-xs">
     <CardHeader>
-     <CardTitle className="text-2xl font-semibold text-center"></CardTitle>
+     <CardTitle className="text-2xl font-semibold text-center">Driver Request</CardTitle>
     </CardHeader>
     <CardContent className="space-y-5">
      <div className="space-y-1">
@@ -71,9 +79,19 @@ export default async function Request({
       <p className="font-medium">{formatDate(request.createdAt)}</p>
      </div>
      <div className="space-y-1">
+      <CardDescription>Requested By:</CardDescription>
+      <p className="font-medium">{request.requestedBy}</p>
+     </div>
+     <div className="space-y-1">
       <CardDescription>Description:</CardDescription>
       <p className="font-medium">{request.description}</p>
      </div>
+     {request.note && request.note.trim().length > 0 && (
+      <div className="space-y-1">
+       <CardDescription>Notes:</CardDescription>
+       <p className="font-medium">{request.note}</p>
+      </div>
+     )}
     </CardContent>
    </Card>
   </main>

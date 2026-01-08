@@ -15,6 +15,7 @@ export async function getRequests() {
    location: true,
    description: true,
    status: true,
+   note: true,
    createdAt: true,
    updatedAt: true
   }

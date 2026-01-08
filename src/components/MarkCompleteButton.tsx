@@ -33,7 +33,7 @@ export function MarkCompleteButton({
   <Button
    type="button"
    disabled={isPending}
-   className="w-full h-10"
+   className="w-full h-10 bg-theme"
    onClick={handleClick}
   >
    Mark Completed

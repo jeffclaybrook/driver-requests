@@ -29,6 +29,14 @@ export function formatDate(date: Date | string) {
  return `${month}/${day}/${year}`
 }
 
+export function formatLocation(location: string) {
+ return location
+  .toLowerCase()
+  .split("_")
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(" ")
+}
+
 export const LOCATION_LABELS: Record<RequestLocation, string> = {
  FAIRVIEW: "Fariview",
  GEORGE_BUSH: "George Bush",

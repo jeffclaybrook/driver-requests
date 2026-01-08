@@ -14,6 +14,7 @@ export async function getRequestById(id: string) {
    requestedBy: true,
    description: true,
    status: true,
+   note: true,
    createdAt: true,
    completedAt: true
   }

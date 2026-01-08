@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { BackIcon } from "@/components/Icons"
 import { MarkCompleteButton } from "@/components/MarkCompleteButton"
+import { NoteForm } from "@/components/NoteForm"
 import Link from "next/link"
 
 export default async function Request({
@@ -65,6 +66,7 @@ export default async function Request({
       <CardDescription>Description:</CardDescription>
       <p className="font-medium">{request.description}</p>
      </div>
+     <NoteForm requestId={request.id} initialNote={request.note} />
     </CardContent>
     {request.status === "PENDING" && (
      <CardFooter>

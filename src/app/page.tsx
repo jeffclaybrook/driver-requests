@@ -1,6 +1,6 @@
 import { getPendingRequests } from "@/lib/queries/get-pending-requests"
 import { requireDbUser } from "@/lib/auth"
-import { LOCATION_LABELS } from "@/lib/formatters"
+import { LOCATION_LABELS, formatLocation } from "@/lib/formatters"
 import { Button } from "@/components/ui/button"
 import { Header } from "@/components/Header"
 import { RequestCard } from "@/components/RequestCard"
@@ -19,6 +19,7 @@ export default async function Home() {
      <Button
       type="button"
       variant="ghost"
+      className="text-theme"
       asChild
      >
       <Link href={"/admin"}>Admin</Link>
@@ -30,11 +31,11 @@ export default async function Home() {
      <p>You&apos;re all caught up!</p>
     </section>
    ) : (
-    <section className="pt-18 p-4 lg:px-6 space-y-10">
+    <section className="pt-18 py-4 px-2 lg:px-6 space-y-10">
      {Object.entries(grouped).map(([location, items]) => (
       <div key={location}>
-       <h2 className="text-lg font-semibold mb-2">{location}</h2>
-       <div className="grid lg:grid-cols-4 gap-2 lg:gap-4">
+       <h2 className="text-lg font-semibold mb-2">{formatLocation(location)}</h2>
+       <div className="grid lg:grid-cols-4 gap-4">
         {items.map((item) => (
          <RequestCard
           key={item.id}

@@ -16,6 +16,11 @@ type UpdateRequestInput = CreateRequestInput & {
  id: string
 }
 
+type CreateNoteInput = {
+ requestId: string
+ note: string
+}
+
 export async function createRequest(input: CreateRequestInput) {
  await requireAdmin()
  
@@ -101,4 +106,22 @@ export async function undoMarkRequestCompleted(id: string) {
 
  revalidatePath("/")
  revalidatePath(`/${id}`)
+}
+
+export async function createNote(input: CreateNoteInput) {
+ await requireDbUser()
+
+ const note = input.note.trim()
+
+ await prisma.request.update({
+  where: {
+   id: input.requestId
+  },
+  data: {
+   note: note.length === 0 ? null : note
+  }
+ })
+
+ revalidatePath(`/${input.requestId}`)
+ revalidatePath(`/admin/${input.requestId}`)
 }

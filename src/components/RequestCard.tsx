@@ -1,3 +1,4 @@
+import { ReactNode } from "react"
 import { STATUS_LABELS, formatDate } from "@/lib/formatters"
 import { Badge } from "./ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
@@ -8,6 +9,7 @@ type RequestCardProps = {
  location: string
  date: Date | string
  description: string
+ children?: ReactNode
  status: "PENDING" | "COMPLETED"
 }
 
@@ -16,6 +18,7 @@ export function RequestCard({
  location,
  date,
  description,
+ children,
  status
 }: RequestCardProps) {
  return (
@@ -28,7 +31,8 @@ export function RequestCard({
     <CardContent>
      <p className="line-clamp-2">{description}</p>
     </CardContent>
-    <CardFooter className="justify-end">
+    <CardFooter className="justify-end gap-2">
+     {children && children}
      <Badge variant={status === "PENDING" ? "secondary" : "success"}>{STATUS_LABELS[status]}</Badge>
     </CardFooter>
    </Card>
