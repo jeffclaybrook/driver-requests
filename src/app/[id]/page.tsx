@@ -41,7 +41,7 @@ export default async function Request({
      </Link>
     </Button>
    </header>
-   <Card className="max-w-xl w-full mx-auto shadow-xs">
+   <Card className="max-w-lg w-full mx-auto shadow-xs">
     <CardHeader>
      <CardTitle className="text-2xl font-semibold text-center">Driver Request</CardTitle>
     </CardHeader>
@@ -66,6 +66,12 @@ export default async function Request({
       <CardDescription>Description:</CardDescription>
       <p className="font-medium">{request.description}</p>
      </div>
+     {request.note && request.note.trim().length > 0 && (
+      <div className="space-y-1">
+       <CardDescription>Notes:</CardDescription>
+       <p className="font-medium">{request.note}</p>
+      </div>
+     )}
      <NoteForm requestId={request.id} initialNote={request.note} />
     </CardContent>
     {request.status === "PENDING" && (

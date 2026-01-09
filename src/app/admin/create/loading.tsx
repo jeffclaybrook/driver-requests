@@ -1,9 +1,9 @@
-import { LoadingIcon } from "@/components/Icons"
+import { Loader } from "@/components/Loader"
 
 export default function CreateLoading() {
  return (
   <main className="flex items-center justify-center h-dvh">
-   <LoadingIcon className="size-16 text-theme animate-spin" />
+   <Loader />
   </main>
  )
 }

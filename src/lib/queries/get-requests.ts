@@ -3,13 +3,33 @@
 import { requireAdmin } from "../auth"
 import { prisma } from "../prisma"
 
-export async function getRequests() {
+const PAGE_SIZE = 16
+
+export async function getRequests(
+ input?: {
+  cursor?: string | null
+  take?: number
+ }
+) {
  await requireAdmin()
 
- return prisma.request.findMany({
-  orderBy: {
-   createdAt: "desc"
-  },
+ const take = input?.take ?? PAGE_SIZE
+ const cursor = input?.cursor ?? null
+
+ const items = await prisma.request.findMany({
+  take,
+  ...(cursor
+   ? {
+    cursor: { id: cursor },
+    skip: 1
+   }
+   : {}
+  ),
+  orderBy: [
+   { status: "asc" },
+   { createdAt: "desc" },
+   { id: "desc" }
+  ],
   select: {
    id: true,
    location: true,
@@ -20,4 +40,8 @@ export async function getRequests() {
    updatedAt: true
   }
  })
+
+ const nextCursor = items.length === take ? items[items.length - 1].id : null
+
+ return { items, nextCursor }
 }

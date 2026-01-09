@@ -61,7 +61,7 @@ export default async function Request({
      </Link>
     </Button>
    </header>
-   <Card className="max-w-xl w-full mx-auto shadow-xs">
+   <Card className="max-w-lg w-full mx-auto shadow-xs">
     <CardHeader>
      <CardTitle className="text-2xl font-semibold text-center">Driver Request</CardTitle>
     </CardHeader>
