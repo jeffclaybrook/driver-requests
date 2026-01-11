@@ -8,7 +8,7 @@ import Link from "next/link"
 export default async function Admin() {
  await requireAdmin()
 
- const { items, nextCursor } = await getRequests({ take: 16 })
+ const { requests, nextCursor } = await getRequests({ take: 16 })
 
  return (
   <main>
@@ -21,7 +21,7 @@ export default async function Admin() {
      <Link href={"/admin/create"}>Create Request</Link>
     </Button>
    </Header>
-   <AdminList initialItems={items} initialCursor={nextCursor} />
+   <AdminList initialRequests={requests} initialCursor={nextCursor} />
   </main>
  )
 }

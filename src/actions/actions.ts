@@ -1,25 +1,10 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { RequestLocation, RequestStatus } from "@prisma/client"
+import { RequestStatus } from "@prisma/client"
 import { requireAdmin, requireDbUser } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
-
-type CreateRequestInput = {
- location: RequestLocation
- requestedBy: string
- description: string
- completed?: boolean
-}
-
-type UpdateRequestInput = CreateRequestInput & {
- id: string
-}
-
-type CreateNoteInput = {
- requestId: string
- note: string
-}
+import { CreateRequestInput, UpdateRequestInput, CreateNoteInput } from "@/lib/schema"
 
 export async function createRequest(input: CreateRequestInput) {
  await requireAdmin()

@@ -16,7 +16,7 @@ export async function getRequests(
  const take = input?.take ?? PAGE_SIZE
  const cursor = input?.cursor ?? null
 
- const items = await prisma.request.findMany({
+ const requests = await prisma.request.findMany({
   take,
   ...(cursor
    ? {
@@ -41,7 +41,7 @@ export async function getRequests(
   }
  })
 
- const nextCursor = items.length === take ? items[items.length - 1].id : null
+ const nextCursor = requests.length === take ? requests[requests.length - 1].id : null
 
- return { items, nextCursor }
+ return { requests, nextCursor }
 }

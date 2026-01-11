@@ -8,20 +8,20 @@ import { RequestCard } from "./RequestCard"
 import { NoteIcon } from "./Icons"
 import { Loader } from "./Loader"
 
-type RequestItem = Awaited<ReturnType<typeof getRequests>>["items"][number]
+type RequestItem = Awaited<ReturnType<typeof getRequests>>["requests"][number]
 
 export function AdminList({
- initialItems,
+ initialRequests,
  initialCursor
 }: {
- initialItems: RequestItem[]
+ initialRequests: RequestItem[]
  initialCursor: string | null
 }) {
- const [items, setItems] = useState<RequestItem[]>(initialItems)
+ const [requests, setRequests] = useState<RequestItem[]>(initialRequests)
  const [cursor, setCursor] = useState<string | null>(initialCursor)
  const [hasMore, setHasMore] = useState<boolean>(initialCursor !== null)
  const [isPending, startTransition] = useTransition()
- const sentinelRef = useRef<HTMLDivElement | null>(null)
+ const scrollRef = useRef<HTMLDivElement | null>(null)
 
  const loadMore = () => {
   if (!hasMore || isPending) {
@@ -31,7 +31,7 @@ export function AdminList({
   startTransition(async () => {
    try {
     const res = await getRequests({ cursor, take: 16 })
-    setItems((prev) => [...prev, ...res.items])
+    setRequests((prev) => [...prev, ...res.requests])
     setCursor(res.nextCursor)
     setHasMore(res.nextCursor !== null)
    } catch (error) {
@@ -42,7 +42,7 @@ export function AdminList({
  }
 
  useEffect(() => {
-  const el = sentinelRef.current
+  const el = scrollRef.current
 
   if (!el) {
    return
@@ -67,7 +67,7 @@ export function AdminList({
  // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [cursor, hasMore])
 
- if (items.length === 0) {
+ if (requests.length === 0) {
   return (
    <section className="flex items-center justify-center h-dvh">
     <p>You&apos;re all caught up!</p>
@@ -78,7 +78,7 @@ export function AdminList({
  return (
   <>
    <section className="grid lg:grid-cols-4 gap-4 pt-18 pb-4 px-2 lg:px-6">
-    {items.map((request) => (
+    {requests.map((request) => (
      <RequestCard
       key={request.id}
       href={`/admin/${request.id}`}
@@ -91,7 +91,7 @@ export function AdminList({
      </RequestCard>
     ))}
    </section>
-   <div ref={sentinelRef} className="h-10" />
+   <div ref={scrollRef} className="h-10" />
    {hasMore && isPending && (
     <div className="flex items-center justify-center pb-6">
      <Loader className="size-10" />

@@ -15,3 +15,19 @@ export const noteFormSchema = z.object({
 export type RequestFormValues = z.input<typeof requestFormSchema>
 
 export type NoteFormValues = z.input<typeof noteFormSchema>
+
+export type CreateRequestInput = {
+ location: RequestLocation
+ requestedBy: string
+ description: string
+ completed?: boolean
+}
+
+export type UpdateRequestInput = CreateRequestInput & {
+ id: string
+}
+
+export type CreateNoteInput = {
+ requestId: string
+ note: string
+}
