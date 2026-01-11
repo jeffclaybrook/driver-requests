@@ -148,22 +148,24 @@ export function RequestForm({ request }: RequestFormProps) {
       </FormItem>
      )}
     />
-    <FormField
-     control={form.control}
-     name="completed"
-     render={({ field }) => (
-      <FormItem>
-       <span className="flex items-center gap-2 text-sm leading-none font-medium select-none">Status</span>
-       <div className="flex items-center gap-2">
-        <FormControl>
-         <Checkbox checked={field.value} onCheckedChange={(checked) => field.onChange(!!checked)} />
-        </FormControl>
-        <FormLabel className="text-md font-normal">Completed?</FormLabel>
-       </div>
-       <FormMessage />
-      </FormItem>
-     )}
-    />
+    {isEdit && (
+     <FormField
+      control={form.control}
+      name="completed"
+      render={({ field }) => (
+       <FormItem>
+        <span className="flex items-center gap-2 text-sm leading-none font-medium select-none">Status</span>
+        <div className="flex items-center gap-2">
+         <FormControl>
+          <Checkbox checked={field.value} onCheckedChange={(checked) => field.onChange(!!checked)} />
+         </FormControl>
+         <FormLabel className="text-md font-normal">Completed?</FormLabel>
+        </div>
+        <FormMessage />
+       </FormItem>
+      )}
+     />
+    )}
     <div className="flex items-center justify-end gap-4">
      {isEdit ? (
       <AlertDialog>
@@ -182,9 +184,15 @@ export function RequestForm({ request }: RequestFormProps) {
          <AlertDialogTitle>Are you sure you want to delete this request?</AlertDialogTitle>
          <AlertDialogDescription>This action cannot be undone and will permanently delete this request.</AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
+        <AlertDialogFooter className="sm:gap-4">
          <AlertDialogCancel>Cancel</AlertDialogCancel>
-         <AlertDialogAction onClick={() => handleDelete()}>Delete</AlertDialogAction>
+         <AlertDialogAction
+          className="bg-destructive text-white hover:bg-destructive/90"
+          onClick={() => handleDelete()}
+         >
+          <DeleteIcon className="size-6" />
+          Delete
+         </AlertDialogAction>
         </AlertDialogFooter>
        </AlertDialogContent>
       </AlertDialog>
