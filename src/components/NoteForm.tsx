@@ -77,7 +77,7 @@ export function NoteForm({
        name="note"
        render={({ field }) => (
         <FormItem>
-         <FormLabel className="text-muted-foreground text-sm font-normal">Notes: (optional)</FormLabel>
+         <FormLabel className="text-muted-foreground text-sm font-normal">Notes</FormLabel>
          <FormControl>
           <Textarea
            {...field}

@@ -72,7 +72,7 @@ export default async function Request({
      </div>
      <div className="space-y-1">
       <CardDescription>Status:</CardDescription>
-      <Badge variant="secondary">{STATUS_LABELS[request.status]}</Badge>
+      <Badge variant={request.status === "PENDING" ? "secondary" : "success"}>{STATUS_LABELS[request.status]}</Badge>
      </div>
      <div className="space-y-1">
       <CardDescription>Date:</CardDescription>

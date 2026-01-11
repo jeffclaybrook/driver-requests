@@ -31,7 +31,7 @@ export function RequestCard({
     <CardContent>
      <p className="line-clamp-2">{description}</p>
     </CardContent>
-    <CardFooter className="justify-end gap-2">
+    <CardFooter className="justify-end gap-3 mt-auto">
      {children && children}
      <Badge variant={status === "PENDING" ? "secondary" : "success"}>{STATUS_LABELS[status]}</Badge>
     </CardFooter>
