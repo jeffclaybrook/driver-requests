@@ -3,11 +3,11 @@
 import { useRef, useTransition } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-import { markRequestCompleted, undoMarkRequestCompleted } from "@/actions/actions"
+import { markRequestCompleted, undoMarkRequestCompleted } from "@/actions/requests"
 import { Button } from "./ui/button"
 import { UndoToast } from "./UndoToast"
 
-const TOAST_DURATION_MS = 4000
+const TOAST_DURATION_MS = 3000
 
 export function MarkCompleteButton({
  requestId
@@ -44,7 +44,6 @@ export function MarkCompleteButton({
 
        startTransition(async () => {
         await undoMarkRequestCompleted(requestId)
-        toast.success("Undo successful!")
         router.refresh()
        })
       }}
@@ -61,7 +60,7 @@ export function MarkCompleteButton({
   <Button
    type="button"
    disabled={isPending}
-   className="w-full h-10 bg-theme hover:bg-theme/90"
+   className="w-full h-10 bg-theme hover:bg-theme/90 disabled:bg-theme/50 disabled:cursor-not-allowed"
    onClick={handleClick}
   >
    Mark Completed

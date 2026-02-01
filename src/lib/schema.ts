@@ -1,7 +1,8 @@
 import { z } from "zod"
-import { RequestLocation } from "@prisma/client"
+import { RequestLocation, RequestType } from "@prisma/client"
 
 export const requestFormSchema = z.object({
+ type: z.enum(RequestType, "Required"),
  location: z.enum(RequestLocation, "Required"),
  requestedBy: z.string().min(1, "Required"),
  description: z.string().min(1, "Required"),
@@ -17,6 +18,7 @@ export type RequestFormValues = z.input<typeof requestFormSchema>
 export type NoteFormValues = z.input<typeof noteFormSchema>
 
 export type CreateRequestInput = {
+ type: RequestType
  location: RequestLocation
  requestedBy: string
  description: string

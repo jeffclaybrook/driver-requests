@@ -1,7 +1,10 @@
-import { RequestLocation, RequestStatus } from "@prisma/client"
+import { RequestLocation, RequestStatus, RequestType } from "@prisma/client"
 
 export function formatDate(date: Date | string) {
- const input = typeof date === "string" ? new Date(date) : date
+ const input = typeof date === "string"
+  ? new Date(date)
+  : date
+  
  const today = new Date()
 
  const startOfToday = new Date(
@@ -37,9 +40,17 @@ export function formatLocation(location: string) {
   .join(" ")
 }
 
+export function formatType(type: string) {
+ if (!type) {
+  return type
+ }
+
+ return type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()
+}
+
 export const LOCATION_LABELS: Record<RequestLocation, string> = {
- FAIRVIEW: "Fariview",
- GEORGE_BUSH: "George Bush",
+ FAIRVIEW: "Fairview",
+ GEORGE_BUSH: "Geroge Bush",
  UNIVERSITY_DRIVE: "University Drive",
  HIGHWAY_30: "Highway 30",
  HOTEL: "Hotel",
@@ -50,4 +61,9 @@ export const LOCATION_LABELS: Record<RequestLocation, string> = {
 export const STATUS_LABELS: Record<RequestStatus, string> = {
  PENDING: "Pending",
  COMPLETED: "Completed"
+}
+
+export const TYPE_LABELS: Record<RequestType, string> = {
+ DRIVER: "Driver",
+ MAINTENANCE: "Maintenance"
 }

@@ -20,6 +20,7 @@ export default async function Edit({
   where: { id },
   select: {
    id: true,
+   type: true,
    location: true,
    requestedBy: true,
    description: true,
@@ -56,6 +57,7 @@ export default async function Edit({
      <RequestForm
       request={{
        id: request.id,
+       type: request.type,
        location: request.location,
        requestedBy: request.requestedBy,
        description: request.description,

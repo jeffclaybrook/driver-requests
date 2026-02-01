@@ -9,7 +9,7 @@ export function Header({
  children?: ReactNode
 }) {
  return (
-  <header className="flex items-center justify-between gap-4 absolute top-0 left-0 w-full z-50 p-4 lg:px-6">
+  <header className="flex items-center justify-between gap-4 relative z-50 p-4 lg:px-6">
    <Link href={"/"} aria-label="Home">
     <Image
      src="/logo.jpeg"

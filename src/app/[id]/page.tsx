@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
-import { getRequestById } from "@/lib/queries/get-request-by-id"
+import { getRequestById } from "@/actions/requests"
 import { requireDbUser } from "@/lib/auth"
-import { LOCATION_LABELS, STATUS_LABELS, formatDate } from "@/lib/formatters"
+import { LOCATION_LABELS, STATUS_LABELS, TYPE_LABELS, formatDate } from "@/lib/formatters"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -43,9 +43,13 @@ export default async function Request({
    </header>
    <Card className="max-w-lg w-full mx-auto shadow-xs">
     <CardHeader>
-     <CardTitle className="text-2xl font-semibold text-center">Driver Request</CardTitle>
+     <CardTitle className="text-2xl font-semibold text-center">{TYPE_LABELS[request.type]} Request</CardTitle>
     </CardHeader>
     <CardContent className="space-y-5">
+     <div className="space-y-1">
+      <CardDescription>Request type:</CardDescription>
+      <p className="font-medium">{TYPE_LABELS[request.type]}</p>
+     </div>
      <div className="space-y-1">
       <CardDescription>Location:</CardDescription>
       <p className="font-medium">{LOCATION_LABELS[request.location]}</p>
@@ -74,11 +78,9 @@ export default async function Request({
      )}
      <NoteForm requestId={request.id} initialNote={request.note} />
     </CardContent>
-    {request.status === "PENDING" && (
-     <CardFooter>
-      <MarkCompleteButton requestId={request.id} />
-     </CardFooter>
-    )}
+    <CardFooter>
+     <MarkCompleteButton requestId={request.id} />
+    </CardFooter>
    </Card>
   </main>
  )

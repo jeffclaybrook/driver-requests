@@ -42,13 +42,14 @@ export function UndoToast({
  }, [durationMs])
 
  return (
-  <div className="w-[356px] rounded-lg border bg-success-bg p-4 shadow-sm border border-success-border">
-   <div className="flex items-center justify-between gap-1.5">
+  <div className="w-[356px] rounded-lg bg-success-bg shadow-sm border border-success-border border-b-0 overflow-hidden">
+   <div className="flex items-center justify-between gap-1.5 p-4 pb-0">
     <p className="text-sm text-success-text font-medium">Requested completed!</p>
     <Button
      type="button"
      variant="ghost"
      size="sm"
+     className="hover:bg-success-text/10"
      onClick={() => {
       onUndo()
       toast.dismiss(toastId)
@@ -58,7 +59,7 @@ export function UndoToast({
     </Button>
    </div>
    <div className="mt-3">
-    <Progress value={progress} className="h-1.5" />
+    <Progress value={progress} className="h-1" />
    </div>
   </div>
  )

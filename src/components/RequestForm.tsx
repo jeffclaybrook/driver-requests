@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
-import { RequestLocation } from "@prisma/client"
-import { createRequest, updateRequest, deleteRequest } from "@/actions/actions"
+import { RequestLocation, RequestType } from "@prisma/client"
+import { createRequest, updateRequest, deleteRequest } from "@/actions/requests"
 import { requestFormSchema, RequestFormValues } from "@/lib/schema"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog"
 import { Button } from "./ui/button"
@@ -16,6 +16,11 @@ import { Input } from "./ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
 import { Textarea } from "./ui/textarea"
 import { DeleteIcon } from "./Icons"
+
+const typeOptions: { value: RequestType; label: string }[] = [
+ { value: "DRIVER", label: "Driver" },
+ { value: "MAINTENANCE", label: "Mainenance" }
+]
 
 const locationOptions: { value: RequestLocation; label: string }[] = [
  { value: "FAIRVIEW", label: "Fairview" },
@@ -30,6 +35,7 @@ const locationOptions: { value: RequestLocation; label: string }[] = [
 type RequestFormProps = {
  request?: {
   id: string
+  type: RequestType
   location: RequestLocation
   requestedBy: string
   description: string
@@ -43,6 +49,7 @@ export function RequestForm({ request }: RequestFormProps) {
  const isEdit = !!request?.id
 
  const defaultValues: RequestFormValues = useMemo(() => ({
+  type: request?.type ?? "DRIVER",
   location: request?.location ?? "FAIRVIEW",
   requestedBy: request?.requestedBy ?? "",
   description: request?.description ?? "",
@@ -96,10 +103,38 @@ export function RequestForm({ request }: RequestFormProps) {
    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
     <FormField
      control={form.control}
+     name="type"
+     render={({ field }) => (
+      <FormItem>
+       <FormLabel>Select request type</FormLabel>
+       <Select defaultValue={field.value} onValueChange={field.onChange}>
+        <FormControl>
+         <SelectTrigger className="w-full md:text-base">
+          <SelectValue placeholder="Select type" />
+         </SelectTrigger>
+        </FormControl>
+        <SelectContent>
+         {typeOptions.map((type) => (
+          <SelectItem
+           key={type.value}
+           value={type.value}
+           className="md:text-base"
+          >
+           {type.label}
+          </SelectItem>
+         ))}
+        </SelectContent>
+       </Select>
+       <FormMessage />
+      </FormItem>
+     )}
+    />
+    <FormField
+     control={form.control}
      name="location"
      render={({ field }) => (
       <FormItem>
-       <FormLabel>Select Location</FormLabel>
+       <FormLabel>Select request location</FormLabel>
        <Select defaultValue={field.value} onValueChange={field.onChange}>
         <FormControl>
          <SelectTrigger className="w-full md:text-base">
@@ -127,7 +162,7 @@ export function RequestForm({ request }: RequestFormProps) {
      name="requestedBy"
      render={({ field }) => (
       <FormItem>
-       <FormLabel>Requested By</FormLabel>
+       <FormLabel>Requested by</FormLabel>
        <FormControl>
         <Input placeholder="Requested by" className="h-12 shadow-none md:text-base" {...field} />
        </FormControl>
@@ -173,6 +208,7 @@ export function RequestForm({ request }: RequestFormProps) {
         <Button
          type="button"
          variant="outline"
+         disabled={isPending}
          className="border-destructive text-destructive hover:border-destructive hover:bg-destructive hover:text-white"
         >
          <DeleteIcon className="size-6" />

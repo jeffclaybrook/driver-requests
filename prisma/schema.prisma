@@ -20,6 +20,7 @@ model Request {
   requestedBy String
   description String
   status      RequestStatus   @default(PENDING)
+  type        RequestType     @default(DRIVER)
   note        String?
   completedAt DateTime?
   createdAt   DateTime        @default(now())
@@ -47,4 +48,9 @@ enum RequestLocation {
   HOTEL
   SCREENED_IMAGES
   OTHER
+}
+
+enum RequestType {
+  DRIVER
+  MAINTENANCE
 }
