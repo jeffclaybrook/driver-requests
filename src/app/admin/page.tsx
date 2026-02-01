@@ -39,7 +39,7 @@ export default async function Admin() {
     </TabsList>
     <TabsContent value="driver">
      {driverRequests.length === 0 ? (
-      <section className="flex items-center justify-center pt-24">
+      <section className="flex items-center justify-center pt-48">
        <p>You&apos;re all caught up!</p>
       </section>
      ) : (
@@ -61,7 +61,7 @@ export default async function Admin() {
     </TabsContent>
     <TabsContent value="maintenance">
      {maintenanceRequests.length === 0 ? (
-      <section className="flex items-center justify-center pt-24">
+      <section className="flex items-center justify-center pt-48">
        <p>You&apos;re all caught up!</p>
       </section>
      ) : (
